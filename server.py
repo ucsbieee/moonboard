@@ -32,9 +32,9 @@ def client_left(client, server):
 # Called when a client sends a message
 def message_received(client, server, message):
 	data = json.loads(message)
-	print(data)
-	pixels[data] = (255, 255, 255)
-	print("Turning on LED #%d" % data)
+	print(data.id)
+	pixels[data.id] = (255, 255, 255)
+	print("Turning on LED #%d" % data.id)
 
 
 PORT=9001
