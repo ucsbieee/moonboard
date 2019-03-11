@@ -3,20 +3,13 @@ import neopixel
 
 pixels = neopixel.NeoPixel(board.D18, 198)
 
-if (holdSelected.state == on):
-	# If a hold is selected a second time, its LED turns off.
-	holdSelected.state = off
+holdInteger = holdToInt(hold) # holdToInt(hold) is an index.js function, idk if it can transfer to here.
 
-else:
+if led-button.item == led-button.red-button:
+	pixels[holdInteger] = (255, 0, 0)
+	
+if led-button.item == led-button.green-button:
+	pixels[holdInteger] = (0, 255, 0)
 
-	# UI Wall = An 11 by 18 grid, with 198 selectable tiles. Overlayed is an image of the moonboard.
-	# Takes manual input (a specific hold) on the UI wall returns value between 0 and 197. 
-	holdSelected = #input()
-
-	# Color Wheel = When a tile/hold is selected, a color wheel pops up, and allows user to pick a color. 
-	# Takes manual input, returns values for R, G, B.
-	colorWheel = #input()
-
-	pixels[holdSelected] = colorWheel
-	holdSelected.state = on
-
+if led-button.item == led-button.blue-button:
+	pixels[holdInteger] = (0, 0, 255)
