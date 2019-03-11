@@ -1,5 +1,5 @@
 import json
-import WebsocketServer
+from websocket_server import WebsocketServer
 import board
 import neopixel
 
@@ -32,12 +32,9 @@ def client_left(client, server):
 # Called when a client sends a message
 def message_received(client, server, message):
 	data = json.loads(message)
-
-
-
-	if len(message) > 200:
-		message = message[:200]+'..'
-	print("Client(%d) said: %s" % (client['id'], message))
+	print(data)
+	pixels[data] = (255, 255, 255)
+	print("Turning on LED #%d" % data)
 
 
 PORT=9001

@@ -1,7 +1,7 @@
 var ws;
 
 window.onload = function() {
-  // init();
+  init();
 }
 
 function toggleButton(buttonId) {
@@ -11,21 +11,45 @@ function toggleButton(buttonId) {
   if(classes.length == 1) {
     //Currently transparent
     classes.add("blue-button");
+    ws.send({
+      led: holdToInt(buttonId), 
+      red: 0, 
+      green: 0, 
+      blue: 255
+    });
   }
   else if(classes.length == 2) {
     if(classes.item(1) == "blue-button") {
       //Currently blue
       classes.remove("blue-button");
       classes.add("green-button");
+      ws.send({
+        led: holdToInt(buttonId), 
+        red: 0, 
+        green: 255, 
+        blue: 0
+      });
     }
     else if(classes.item(1) == "green-button") {
       //Currently green
       classes.remove("green-button");
       classes.add("red-button");
+      ws.send({
+      led: holdToInt(buttonId), 
+        red: 255, 
+        green: 0, 
+        blue: 0
+      });
     }
     else if(classes.item(1) == "red-button") {
       //Currently red
       classes.remove("red-button");
+      ws.send({
+        led: holdToInt(buttonId), 
+        red: 0, 
+        green: 0, 
+        blue: 0
+      });
     }
   }
 }
@@ -64,40 +88,39 @@ function init() {
 
   // Set event handlers.
   ws.onopen = function() {
-    output("onopen");
+    console.log("Successfully opened WebSocket");
   };
   
   ws.onmessage = function(e) {
     // e.data contains received string.
-    output("onmessage: " + e.data);
+    console.log("Message: " + e.data);
   };
   
   ws.onclose = function() {
-    output("onclose");
+    console.log("Successfully closed WebSocket");
   };
 
   ws.onerror = function(e) {
-    output("onerror");
-    console.log(e)
+    console.log("An error occurred: " + e);
   };
 }
 
-function onSubmit() {
-  var input = document.getElementById("input");
-  // You can send message to the Web Socket using ws.send.
-  ws.send(input.value);
-  output("send: " + input.value);
-  input.value = "";
-  input.focus();
-}
+// function onSubmit() {
+//   var input = document.getElementById("input");
+//   // You can send message to the Web Socket using ws.send.
+//   ws.send(input.value);
+//   output("send: " + input.value);
+//   input.value = "";
+//   input.focus();
+// }
 
-function onCloseClick() {
-  ws.close();
-}
+// function onCloseClick() {
+//   ws.close();
+// }
 
-function output(str) {
-  var log = document.getElementById("log");
-  var escaped = str.replace(/&/, "&amp;").replace(/</, "&lt;").
-    replace(/>/, "&gt;").replace(/"/, "&quot;"); // "
-  log.innerHTML = escaped + "<br>" + log.innerHTML;
-}
+// function output(str) {
+//   var log = document.getElementById("log");
+//   var escaped = str.replace(/&/, "&amp;").replace(/</, "&lt;").
+//     replace(/>/, "&gt;").replace(/"/, "&quot;"); // "
+//   log.innerHTML = escaped + "<br>" + log.innerHTML;
+// }
