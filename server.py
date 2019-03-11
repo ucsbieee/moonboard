@@ -11,7 +11,7 @@ numPixels = 198
 # For RGBW NeoPixels, simply change the ORDER to RGBW or GRBW.
 ORDER = neopixel.RGB
  
-pixels = neopixel.NeoPixel(pixelPin, numPixels, brightness=0.2, auto_write=False, pixel_order=ORDER)
+pixels = neopixel.NeoPixel(pixelPin, numPixels, pixel_order=ORDER)
 
 # Syntax to change LED
 # pixels[LED_NUMBER] = (RED_VALUE, GREEN_VALUE, BLUE_VALUE)
