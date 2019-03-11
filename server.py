@@ -23,20 +23,17 @@ def new_client(client, server):
 	print("New client connected and was given id %d" % client['id'])
 	server.send_message_to_all("Hey all, a new client has joined us")
 
-
 # Called for every client disconnecting
 def client_left(client, server):
 	print("Client(%d) disconnected" % client['id'])
 
-
 # Called when a client sends a message
 def message_received(client, server, message):
 	print(message)
-	data = json.loads(message)
-	print(data.id)
-	pixels[data.id] = (255, 255, 255)
-	print("Turning on LED #%d" % data.id)
-
+	# data = json.loads(message)
+	# print(data.id)
+	# pixels[data.id] = (255, 255, 255)
+	# print("Turning on LED #%d" % data.id)
 
 PORT=9001
 server = WebsocketServer(PORT)
