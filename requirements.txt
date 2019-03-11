@@ -1,0 +1,7 @@
+# requirements.txt
+# This file lists all the packages necessary to run the Moonboard program
+# Use 'sudo pip install -r requirements.txt' in the moonboard directory to install
+
+websocket-server
+rpi_ws281x 
+adafruit-circuitpython-neopixel
