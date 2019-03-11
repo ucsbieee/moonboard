@@ -9,23 +9,23 @@ function toggleButton(buttonId) {
   var classes = document.getElementById(buttonId).classList;
 
   if(classes.length == 1) {
-    //Currently black
-    classes.add("red-button");
+    //Currently transparent
+    classes.add("blue-button");
   }
   else if(classes.length == 2) {
-    if(classes.item(1) == "red-button") {
-      //Currently red
-      classes.remove("red-button");
+    if(classes.item(1) == "blue-button") {
+      //Currently blue
+      classes.remove("blue-button");
       classes.add("green-button");
     }
     else if(classes.item(1) == "green-button") {
       //Currently green
       classes.remove("green-button");
-      classes.add("blue-button");
+      classes.add("red-button");
     }
-    else if(classes.item(1) == "blue-button") {
-      //Currently blue
-      classes.remove("blue-button");
+    else if(classes.item(1) == "red-button") {
+      //Currently red
+      classes.remove("red-button");
     }
   }
 }
