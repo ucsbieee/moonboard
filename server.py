@@ -20,20 +20,20 @@ pixels = neopixel.NeoPixel(pixelPin, numPixels, brightness=0.2, auto_write=False
 
 # Called for every client connecting (after handshake)
 def new_client(client, server):
-	print("New client connected and was given id %d" % client["id"])
+	print("New client connected and was given led %d" % client["led"])
 	server.send_message_to_all("Hey all, a new client has joined us")
 
 # Called for every client disconnecting
 def client_left(client, server):
-	print("Client(%d) disconnected" % client["id"])
+	print("Client(%d) disconnected" % client["led"])
 
 # Called when a client sends a message
 def message_received(client, server, message):
 	print(message)
 	data = json.loads(message)
-	print(data["id"])
-	pixels[data["id"]] = (data["red"], data["green"], data["blue"])
-	print("Turning on LED #%d" % data["id"])
+	print(data["led"])
+	pixels[data["led"]] = (data["red"], data["green"], data["blue"])
+	print("Turning on LED #%d" % data["led"])
 
 PORT=9001
 server = WebsocketServer(PORT)
