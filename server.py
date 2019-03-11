@@ -33,6 +33,7 @@ def message_received(client, server, message):
 	data = json.loads(message)
 	print(data["led"])
 	pixels[data["led"]] = (data["red"], data["green"], data["blue"])
+	pixels.show()
 	print("Turning on LED #%d" % data["led"])
 
 PORT=9001
