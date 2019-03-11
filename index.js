@@ -11,45 +11,45 @@ function toggleButton(buttonId) {
   if(classes.length == 1) {
     //Currently transparent
     classes.add("blue-button");
-    ws.send({
+    ws.send(JSON.stringify({
       led: holdToInt(buttonId), 
       red: 0, 
       green: 0, 
       blue: 255
-    });
+    }));
   }
   else if(classes.length == 2) {
     if(classes.item(1) == "blue-button") {
       //Currently blue
       classes.remove("blue-button");
       classes.add("green-button");
-      ws.send({
+      ws.send(JSON.stringify({
         led: holdToInt(buttonId), 
         red: 0, 
         green: 255, 
         blue: 0
-      });
+      }));
     }
     else if(classes.item(1) == "green-button") {
       //Currently green
       classes.remove("green-button");
       classes.add("red-button");
-      ws.send({
-      led: holdToInt(buttonId), 
+      ws.send(JSON.stringify({
+        led: holdToInt(buttonId), 
         red: 255, 
         green: 0, 
         blue: 0
-      });
+      }));
     }
     else if(classes.item(1) == "red-button") {
       //Currently red
       classes.remove("red-button");
-      ws.send({
+      ws.send(JSON.stringify({
         led: holdToInt(buttonId), 
         red: 0, 
         green: 0, 
         blue: 0
-      });
+      }));
     }
   }
 }
