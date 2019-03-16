@@ -32,7 +32,7 @@ def message_received(client, server, message):
 	print(message)
 	data = json.loads(message)
 	print(data["led"])
-	pixels[data["led"]] = (data["red"], data["green"], data["blue"])
+	pixels[data["led"]] = (data["red"], data["blue"], data["green"])
 	pixels.show()
 	print("Turning on LED #%d" % data["led"])
 
