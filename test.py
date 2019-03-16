@@ -23,13 +23,13 @@ for x in range(0, 198):
 	pixels[x] = (0, 0, 0)
 
 for x in range(0, 198):
-	pixels[x] = (0, 255, 0)
+	pixels[x] = (0, 0, 255)
 	pixels.show()
 	time.sleep(0.1)
 	pixels[x] = (0, 0, 0)
 
 for x in range(0, 198):
-	pixels[x] = (0, 0, 255)
+	pixels[x] = (0, 255, 0)
 	pixels.show()
 	time.sleep(0.1)
 	pixels[x] = (0, 0, 0)
