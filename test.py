@@ -8,7 +8,7 @@ numPixels = 198
  
 # The order of the pixel colors - RGB or GRB. Some NeoPixels have red and green reversed!
 # For RGBW NeoPixels, simply change the ORDER to RGBW or GRBW.
-ORDER = neopixel.RGB
+ORDER = neopixel.BRG
  
 pixels = neopixel.NeoPixel(pixelPin, numPixels, pixel_order=ORDER)
 
