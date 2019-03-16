@@ -19,17 +19,17 @@ pixels = neopixel.NeoPixel(pixelPin, numPixels)
 for x in range(0, 198):
 	pixels[x] = (255, 0, 0)
 	pixels.show()
-	time.sleep(0.1)
+	time.sleep(0.2)
 	pixels[x] = (0, 0, 0)
 
 for x in range(0, 198):
 	pixels[x] = (0, 0, 255)
 	pixels.show()
-	time.sleep(0.1)
+	time.sleep(0.2)
 	pixels[x] = (0, 0, 0)
 
 for x in range(0, 198):
 	pixels[x] = (0, 255, 0)
 	pixels.show()
-	time.sleep(0.1)
+	time.sleep(0.2)
 	pixels[x] = (0, 0, 0)
