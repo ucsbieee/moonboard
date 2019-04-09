@@ -27,18 +27,4 @@ void loop()
   //// Takes input from JSON message array of size 4. array message = [pixelAddress, valueG, valueR, valueB]
   //strip.setPixelColor(message[0], message[1], message[2], message[3]);
   //strip.show();
-  strip.setPixelColor(0, 255, 0, 0);
-  strip.show();
-  strip.setPixelColor(10, 0, 0, 255);
-  strip.show();
-  strip.setPixelColor(5, 0, 0, 255);
-  strip.show();
-  strip.setPixelColor(18, 0, 0, 255);
-  strip.show();
-  strip.setPixelColor(26, 0, 0, 255);
-  strip.show();
-  strip.setPixelColor(34, 0, 0, 255);
-  strip.show();
-  strip.setPixelColor(48, 0, 255, 0);
-  strip.show();
 }
