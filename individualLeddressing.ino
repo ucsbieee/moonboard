@@ -1,7 +1,4 @@
-// A demo that lights a small number of LEDs in the same way that a climb's LEDs would be lit for the LED moonboard.
-// The First is lit Green (go), the Intermediates are lit Blue, an the Final is lit Red (stop).
-// Within 'void loop()' an example is hardcoded in (with, commented out just above, an attempt at the final code, 
-// taking arguments from a JSON 'message' array (maybe?)).
+// Takes input from an RPi to light up LEDs on the Moonboard.
  
 #include <Adafruit_NeoPixel.h>
 
