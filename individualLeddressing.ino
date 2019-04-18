@@ -9,6 +9,11 @@ Adafruit_NeoPixel strip = Adafruit_NeoPixel(N_LEDS, PIN, NEO_GRB + NEO_KHZ800);
 
 void setup() 
 {
+  // Opens serial connection.
+  Serial.begin(9600);
+  while (Serial.available()>0) serIn=Serial.read();
+ 
+  // Initializes our LEDs.
   strip.begin();
   strip.show();
 }
@@ -21,7 +26,7 @@ void setup()
 
 void loop()
 {
-  //// Takes input from JSON message array of size 4. array message = [pixelAddress, valueG, valueR, valueB]
-  //strip.setPixelColor(message[0], message[1], message[2], message[3]);
-  //strip.show();
+  // Takes input from RPi serial connection.
+  strip.setPixelColor(message[0], message[1], message[2], message[3]);
+  strip.show();
 }
