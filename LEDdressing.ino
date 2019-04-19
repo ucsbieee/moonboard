@@ -37,30 +37,17 @@ void loop()
   // Takes input from RPi serial connection.
   if (Serial.available()) 
   {
-    // (Dummy fxn) Decides whether or not serIn is a numAddress (number string, charReceived = false) or charColor (alphabetical char, charReceived = true). 
-    addressOrColor();
-
-    // (Dummy fxn) If charReceived == false, then serIn is an LED address. Takes string of numbers and decodes it into an address.
-    decodeAddress();
-    
-    // If charReceived == true, takes a single character as input and outputs the color.
-    serCharColor(Serial.read());
+    // The following 3 comments are from functions that are being condensed into lightUpHold() 
+    //// (Dummy fxn) Decides whether or not serIn is a numAddress (number string, charReceived = false) or charColor (alphabetical char, charReceived = true). 
+    //// (Dummy fxn) If charReceived == false, then serIn is an LED address. Takes string of numbers and decodes it into an address.
+    //// If charReceived == true, takes a single character as input and outputs the color.
+    lightUpHold(Serial.read());
   }     
   
   strip.show();
 }
 
-void addressOrColor()
-{
-  //
-}
-
-void decodeAddress()
-{
-  //
-}
-
-void serCharColor(char serialInput)
+void lightUpHold(char serialInput)
 {
 
   if (Serial.read() != '\0')
@@ -69,7 +56,8 @@ void serCharColor(char serialInput)
     int n;
     char charColor;
     
-    switch (serialInput) 
+    //Takes first three digits of serialInput and 
+    switch (charFour) 
     {    
       // If the Arduino receives a 'G' char over serial, sets addressed pixel to green.
       case 'G':
@@ -98,3 +86,22 @@ void serCharColor(char serialInput)
     }
   }
 }
+
+void parseData()
+{
+ char color = '';
+ int integerFromPi = 0;
+
+
+    // split the data into its parts
+    
+  char * strtokIndx; // this is used by strtok() as an index
+  
+  strtokIndx = strtok(receivedChars,",");      // get the first part - the string
+  strcpy(messageFromPC, strtokIndx); // copy it to messageFromPC
+  
+  strtokIndx = strtok(NULL, NULL); // this continues where the previous call left off
+  integerFromPi = atoi(strtokIndx);     // convert this part to an integer
+
+}
+
