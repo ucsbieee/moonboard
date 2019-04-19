@@ -38,7 +38,7 @@ void loop()
   if (Serial.available() == 2) 
   {
     char color = Serial.read();
-    int LEDnum = Serial.read();
+    int LEDnum = Serial.read() - '0';
 
     lightUpHold(LEDnum, color);
   }     
