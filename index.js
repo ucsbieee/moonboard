@@ -9,46 +9,38 @@ function toggleButton(buttonId) {
   var classes = document.getElementById(buttonId).classList;
 
   if(classes.length == 1) {
-    //Currently transparent
+    //Currently off, turn blue
     classes.add("blue-button");
     ws.send(JSON.stringify({
       led: holdToInt(buttonId), 
-      red: 0, 
-      green: 0, 
-      blue: 255
+      color: "B"
     }));
   }
   else if(classes.length == 2) {
     if(classes.item(1) == "blue-button") {
-      //Currently blue
+      //Currently blue, turn green
       classes.remove("blue-button");
       classes.add("green-button");
       ws.send(JSON.stringify({
         led: holdToInt(buttonId), 
-        red: 0, 
-        green: 255, 
-        blue: 0
+        color: "G"
       }));
     }
     else if(classes.item(1) == "green-button") {
-      //Currently green
+      //Currently green, turn red
       classes.remove("green-button");
       classes.add("red-button");
       ws.send(JSON.stringify({
         led: holdToInt(buttonId), 
-        red: 255, 
-        green: 0, 
-        blue: 0
+        color: "R"
       }));
     }
     else if(classes.item(1) == "red-button") {
-      //Currently red
+      //Currently red, turn off
       classes.remove("red-button");
       ws.send(JSON.stringify({
         led: holdToInt(buttonId), 
-        red: 0, 
-        green: 0, 
-        blue: 0
+        color: "o"
       }));
     }
   }
@@ -84,7 +76,7 @@ function intToHold(int) {
 
 function init() {
   // Connect to Web Socket
-  ws = new WebSocket("ws://localhost:9001/");
+  ws = new WebSocket("ws://192.168.4.1:9001/");
 
   // Set event handlers.
   ws.onopen = function() {
