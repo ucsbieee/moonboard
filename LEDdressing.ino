@@ -35,29 +35,23 @@ uint32_t fuscia    = strip.Color(0, 200, 100);
 void loop()
 { 
   // Takes input from RPi serial connection.
-  if (Serial.available()) 
+  if (Serial.available() == 2) 
   {
-    // The following 3 comments are from functions that are being condensed into lightUpHold() 
-    //// (Dummy fxn) Decides whether or not serIn is a numAddress (number string, charReceived = false) or charColor (alphabetical char, charReceived = true). 
-    //// (Dummy fxn) If charReceived == false, then serIn is an LED address. Takes string of numbers and decodes it into an address.
-    //// If charReceived == true, takes a single character as input and outputs the color.
-    lightUpHold(Serial.read());
+    char color = Serial.read();
+    int LEDnum = Serial.read();
+
+    lightUpHold(LEDnum, color);
   }     
   
   strip.show();
 }
 
-void lightUpHold(char serialInput)
+void lightUpHold(int n, char charCol)
 {
-
-  if (Serial.read() != '\0')
-  {
-    
-    int n;
-    char charColor;
+    char charColor = off;
     
     //Takes first three digits of serialInput and 
-    switch (charFour) 
+    switch (charCol) 
     {    
       // If the Arduino receives a 'G' char over serial, sets addressed pixel to green.
       case 'G':
@@ -75,33 +69,15 @@ void lightUpHold(char serialInput)
         break;
         
       // If no character is received, defaults to off.
-      default:
+      case 'o':
         charColor = off;
         break;
-        
+
       // Leaves room for plenty more colors in future updates :)
-
-    // Lights an LED using its received address and color.
-    strip.setPixelColor(n, charColor);
     }
-  }
+    // Lights an LED using its received address and color.
+    if ((n >= 0) && (n < 198))
+    {
+      strip.setPixelColor(n, charColor);
+    }
 }
-
-void parseData()
-{
- char color = '';
- int integerFromPi = 0;
-
-
-    // split the data into its parts
-    
-  char * strtokIndx; // this is used by strtok() as an index
-  
-  strtokIndx = strtok(receivedChars,",");      // get the first part - the string
-  strcpy(messageFromPC, strtokIndx); // copy it to messageFromPC
-  
-  strtokIndx = strtok(NULL, NULL); // this continues where the previous call left off
-  integerFromPi = atoi(strtokIndx);     // convert this part to an integer
-
-}
-
