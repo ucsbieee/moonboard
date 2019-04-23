@@ -37,6 +37,7 @@ def clear_board():
 	for x in range(0,198):
 		board[x] = "o"
 		send_led(x, "o")
+		time.sleep(2)
 
 	server.send_message_to_all(json.dumps(board))
 

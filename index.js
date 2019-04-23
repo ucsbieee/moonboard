@@ -1,4 +1,5 @@
 var ws;
+var board;
 
 window.onload = function() {
   init();
@@ -8,42 +9,40 @@ function toggleButton(buttonId) {
   // console.log(buttonId);
   var classes = document.getElementById(buttonId).classList;
 
+  var data = {
+    led: holdToInt(buttonId),
+    color: ""
+  };
+
   if(classes.length == 1) {
     //Currently off, turn blue
-    classes.add("blue-button");
-    ws.send(JSON.stringify({
-      led: holdToInt(buttonId), 
-      color: "B"
-    }));
+    data.color = "B";
   }
   else if(classes.length == 2) {
     if(classes.item(1) == "blue-button") {
       //Currently blue, turn green
-      classes.remove("blue-button");
-      classes.add("green-button");
-      ws.send(JSON.stringify({
-        led: holdToInt(buttonId), 
-        color: "G"
-      }));
+      data.color = "G";
     }
     else if(classes.item(1) == "green-button") {
       //Currently green, turn red
-      classes.remove("green-button");
-      classes.add("red-button");
-      ws.send(JSON.stringify({
-        led: holdToInt(buttonId), 
-        color: "R"
-      }));
+      data.color = "R";
     }
     else if(classes.item(1) == "red-button") {
       //Currently red, turn off
-      classes.remove("red-button");
-      ws.send(JSON.stringify({
-        led: holdToInt(buttonId), 
-        color: "o"
-      }));
+      data.color = "o";
     }
   }
+
+  ws.send(JSON.stringify(data));
+}
+
+function clearMoonboard() {
+  var data = {
+    led: -1,
+    color: "o"
+  };
+
+  ws.send(JSON.stringify(data));
 }
 
 function holdToInt(hold) {
@@ -59,60 +58,68 @@ function intToHold(int) {
   return column + row;
 }
 
-// function test() {
-//   var letters = "ABCDEFGHIJK";
-//   for(var i = 0; i < 11; i++) {
-//     for(var j = 1; j <= 18; j++) {
-//       console.log(letters[i] + j + " " + holdToInt(letters[i] + j));
-//     }
-//   }
-// }
+function showMessage(type, message) {
+  document.getElementById('message').innerHTML = message;
 
-// function test2() {
-//   for(var i = 0; i < 198; i++) {
-//     console.log(i + " " + intToHold(i));
-//   }
-// }
+  //Update class list
+  var classToAdd = "";
+  if(type == "error") {
+    classToAdd = "red-border";
+  }
+  else if(type == "success") {
+    classToAdd = "green-border";
+  }
+  else {
+    classToAdd = "grey-border";
+  }
+
+  document.getElementById('messageDiv').classList = "modal-content " + classToAdd;
+  document.getElementById('messageModal').style.display = "block";
+}
 
 function init() {
+  // Display loading message
+  showMessage("regular", "Connecting to Moonboard...");
+
   // Connect to Web Socket
   ws = new WebSocket("ws://192.168.4.1:9001/");
+  // ws = new WebSocket("ws://localhost:9001/");
 
   // Set event handlers.
   ws.onopen = function() {
     console.log("Successfully opened WebSocket");
+    document.getElementById('messageModal').style.display = "none";
   };
   
   ws.onmessage = function(e) {
     // e.data contains received string.
-    console.log("Message: " + e.data);
+    board = JSON.parse(e.data);
+    console.log(board);
+
+    for(var i = 0; i < 198; i++) {
+      var classToAdd = "";
+      if(board[i] == "R") {
+        classToAdd = "red-button";
+      }
+      else if(board[i] == "G") {
+        classToAdd = "green-button";
+      }
+      else if(board[i] == "B") {
+        classToAdd = "blue-button";
+      }
+
+      document.getElementById(intToHold(i)).classList = "led-button " + classToAdd;
+    }
   };
   
   ws.onclose = function() {
     console.log("Successfully closed WebSocket");
+    showMessage("error", "Failed to connect to the Moonboard server.<br>Ensure that the Raspberry Pi is on and you are connected to the 'MoonboardPi' network.");
   };
 
   ws.onerror = function(e) {
-    console.log("An error occurred: " + e);
+    console.log("An error occurred:");
+    console.log(e);
+    showMessage("error", "Failed to connect to the Moonboard server.<br>Ensure that the Raspberry Pi is on and you are connected to the 'MoonboardPi' network.");
   };
 }
-
-// function onSubmit() {
-//   var input = document.getElementById("input");
-//   // You can send message to the Web Socket using ws.send.
-//   ws.send(input.value);
-//   output("send: " + input.value);
-//   input.value = "";
-//   input.focus();
-// }
-
-// function onCloseClick() {
-//   ws.close();
-// }
-
-// function output(str) {
-//   var log = document.getElementById("log");
-//   var escaped = str.replace(/&/, "&amp;").replace(/</, "&lt;").
-//     replace(/>/, "&gt;").replace(/"/, "&quot;"); // "
-//   log.innerHTML = escaped + "<br>" + log.innerHTML;
-// }
