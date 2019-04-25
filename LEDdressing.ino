@@ -22,7 +22,7 @@ void setup()
 // allows the listed color to be called via:> strip.setPixelColor(n, color)
 
 // Basics. 
-uint32_t green = strip.Color(255, 0, 50);
+uint32_t green = strip.Color(230, 0, 50);
 uint32_t red   = strip.Color(0, 255, 75);
 uint32_t blue  = strip.Color(100, 0, 255);
 uint32_t off   = strip.Color(0, 0, 0);
@@ -43,7 +43,13 @@ void loop()
 
     lightUpHold(LEDnum, color);
   }     
-  
+  else if (Serial.available() > 3)
+  {
+    while (Serial.available() > 0)
+    {
+      Serial.read();
+    }
+  }
   strip.show();
 }
 
@@ -73,6 +79,11 @@ void lightUpHold(int n, char charCol)
       // If no character is received, defaults to off.
       case 'o':
         charColor = off;
+        break;
+
+      // If upper case 'O' is received, turns off all pixels.
+      case 'O':
+        strip.clear();
         break;
 
       // Leaves room for plenty more colors in future updates :)
