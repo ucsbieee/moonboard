@@ -36,6 +36,11 @@ function toggleButton(buttonId) {
   ws.send(JSON.stringify(data));
 }
 
+function confirmClear() {
+  showMessage("regular", "Are you sure you want to clear the Moonboard?");
+  document.getElementById('confirm-buttons').style.display = "block";
+}
+
 function clearMoonboard() {
   var data = {
     led: -1,
@@ -43,6 +48,14 @@ function clearMoonboard() {
   };
 
   ws.send(JSON.stringify(data));
+
+  closeModal();
+}
+
+function closeModal() {
+  document.getElementById('messageModal').style.display = "none";
+  document.getElementById('connect-buttons').style.display = "none";
+  document.getElementById('confirm-buttons').style.display = "none";
 }
 
 function holdToInt(hold) {
@@ -80,6 +93,7 @@ function showMessage(type, message) {
 function init() {
   // Display loading message
   showMessage("regular", "Connecting to Moonboard...");
+  document.getElementById('connect-buttons').style.display = "none";
 
   // Connect to Web Socket
   ws = new WebSocket("ws://192.168.4.1:9001/");
@@ -88,7 +102,7 @@ function init() {
   // Set event handlers.
   ws.onopen = function() {
     console.log("Successfully opened WebSocket");
-    document.getElementById('messageModal').style.display = "none";
+    closeModal();
   };
   
   ws.onmessage = function(e) {
@@ -115,11 +129,13 @@ function init() {
   ws.onclose = function() {
     console.log("Successfully closed WebSocket");
     showMessage("error", "Failed to connect to the Moonboard server.<br>Ensure that the Raspberry Pi is on and you are connected to the 'MoonboardPi' network.");
+    document.getElementById('connect-buttons').style.display = "block";
   };
 
   ws.onerror = function(e) {
     console.log("An error occurred:");
     console.log(e);
     showMessage("error", "Failed to connect to the Moonboard server.<br>Ensure that the Raspberry Pi is on and you are connected to the 'MoonboardPi' network.");
+    document.getElementById('connect-buttons').style.display = "block";
   };
 }

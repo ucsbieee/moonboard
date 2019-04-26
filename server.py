@@ -21,8 +21,13 @@ def message_received(client, server, message):
 	if data["led"] == -1:
 		clear_board()
 	else:
+		# Update on board array
 		board[data["led"]] = data["color"]
+
+		# Send command to Arduino
 		send_led(data["led"], data["color"])
+
+		# Send new board to all users
 		server.send_message_to_all(json.dumps(board))
 
 def send_led(led, color):
@@ -34,11 +39,17 @@ def send_led(led, color):
 	ser.write(str(chr(math.ceil(led / 2))).encode('ascii'))
 
 def clear_board():
+	# Send command to clear all LEDs
+	color = "O"
+	ser.write(color.encode('ascii'))
+	ser.write(str(chr(0)).encode('ascii'))
+	ser.write(str(chr(0)).encode('ascii'))
+
+	# Clear board array
 	for x in range(0,198):
 		board[x] = "o"
-		send_led(x, "o")
-		time.sleep(2)
 
+	# Send cleared board to all users
 	server.send_message_to_all(json.dumps(board))
 
 # Startup Code

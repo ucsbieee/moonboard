@@ -47,11 +47,23 @@ th {
 }
 
 tr {
-	height: 65px;
+	height: 67px;
 }
 
 th, tr {
 	color: transparent;
+}
+
+.clear-button {
+	width: 200px;
+	margin: 2em;
+	height: 50px;
+	border: 2px solid #888;
+	font-size: 15px;
+	font-family: "Avenir";
+	padding: 8px 12px;
+	border-radius: 6px;
+	box-shadow: none;
 }
 
 .top-banner {
@@ -64,7 +76,13 @@ th, tr {
 }
 
 .main {
-	padding: 150px 100px 100px 100px;
+	text-align: center;
+	padding-top: 150px;
+}
+
+table.center {
+	margin-left:auto; 
+	margin-right:auto;
 }
 
 .led-button {
@@ -98,7 +116,7 @@ th, tr {
 	display: none; /* Hidden by default */
 	position: fixed; /* Stay in place */
 	z-index: 1; /* Sit on top */
-	padding-top: 50vh; /* Location of the box */
+	padding-top: 45vh; /* Location of the box */
 	left: 0;
 	top: 0;
 	width: 100%; /* Full width */

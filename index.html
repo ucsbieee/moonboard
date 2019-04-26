@@ -18,7 +18,7 @@
 		</div>
 
 		<div class="main">
-			<table>
+			<table class="center">
 				<tr style="height: 80px">
 					<th style="width: 80px"></th>
 					<th>A</th>
@@ -32,7 +32,7 @@
 					<th>I</th>
 					<th>J</th>
 					<th>K</th>
-					<th style="width: 30px"></th>
+					<th style="width: 35px"></th>
 				</tr>
 				<tr>
 					<th>18</th>
@@ -288,16 +288,24 @@
 					<td><button id="K1" class="led-button" onclick="toggleButton(this.id)"></button></td>
 				</tr>
 			</table>
+
+			<button class="clear-button center" onclick="confirmClear();">Clear Board</button>
 		</div>
 
-		<div class="background">
+		<!-- <div class="background">
 			<img src="images/moonboard.jpg" alt="Moonboard" />
-		</div>
+		</div> -->
 
 		<div id="messageModal" class="modal">
 			<div class="modal-content grey-border" id="messageDiv">
 				<p id="message"></p>
-				<button type="button" id="connect" onclick="init();">Try Again</button>
+				<div id="connect-buttons" style="display: none;">
+					<button type="button" onclick="init();">Try Again</button>
+				</div>
+				<div id="confirm-buttons" style="display: none;">
+					<button type="button" onclick="clearMoonboard();">Yes, clear!</button>
+					<button type="button" onclick="closeModal();">No, cancel.</button>
+				</div>
 			</div>
 		</div>
 
