@@ -22,7 +22,7 @@ void setup()
 // allows the listed color to be called via:> strip.setPixelColor(n, color)
 
 // Basics. 
-uint32_t green = strip.Color(230, 0, 50);
+uint32_t green = strip.Color(255, 0, 25);
 uint32_t red   = strip.Color(0, 255, 75);
 uint32_t blue  = strip.Color(100, 0, 255);
 uint32_t off   = strip.Color(0, 0, 0);
@@ -31,6 +31,7 @@ uint32_t off   = strip.Color(0, 0, 0);
 uint32_t pmMajesty = strip.Color(0, 100, 200);
 uint32_t turquoise = strip.Color(100, 0, 200);
 uint32_t fuscia    = strip.Color(0, 200, 100);
+uint32_t borderlineTeal = strip.Color(230, 0, 50);
 
 void loop()
 { 
