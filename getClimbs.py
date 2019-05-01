@@ -6,20 +6,15 @@ import json
 import string
 from datetime import datetime
 
-HOLDS_CONF = { "sets":["A","B","OS"],
+HOLDS_CONF = { "sets":["A","B"],
                "configurations":{
                    'Hold Set B 2016':{"shortName":"B 2016", "set":"B", "placement":{}},
-                   'Hold Set A 2016':{"shortName":"A 2016", "set":"A", "placement":{}},
-                   'Original School Holds 2016':{"shortName":"OS 2016", "set":"OS", "placement":{}}
+                   'Hold Set A 2016':{"shortName":"A 2016", "set":"A", "placement":{}}
                },
                "setup":{
-                   1:{'Hold Set B 2016', 'Hold Set A 2016', 'Original School Holds 2016'},
-                   2:{'Hold Set B 2016', 'Hold Set A 2016'},
-                   3:{'Hold Set B 2016', 'Original School Holds 2016'},
-                   4:{'Hold Set A 2016', 'Original School Holds 2016'},
-                   5:{'Hold Set B 2016'},
-                   6:{'Original School Holds 2016'},
-                   7:{'Hold Set A 2016'},
+                   1:{'Hold Set A 2016', 'Hold Set B 2016'},
+                   2:{'Hold Set A 2016'},
+                   3:{'Hold Set A 2016'},
                },
                "grid_name":{
                    "horizontal":string.ascii_uppercase[0:11],
