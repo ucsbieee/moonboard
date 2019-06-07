@@ -34,7 +34,7 @@ h2 {
 table {
 	border: 2px solid black;
 	table-layout: fixed;
-	width: 882px;
+	width: 1074px;
 	z-index: 1;
 }
 
@@ -47,7 +47,7 @@ th {
 }
 
 tr {
-	height: 67px;
+	height: 81px;
 }
 
 th, tr {
